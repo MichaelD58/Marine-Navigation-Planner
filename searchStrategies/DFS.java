@@ -2,21 +2,20 @@ package searchStrategies;
 
 import coreComponents.*;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Stack;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class BFS{
+public class DFS{
     private final Coord start;
     private final Coord goal;
     private final int[][] map;
-    private Queue<Node> frontier = new LinkedList();
+    private Stack<Node> frontier = new Stack<Node>();
     private HashSet<String> explored = new HashSet<String>();
     private int nodesVisited = 0;
 
-    public BFS(Coord start, Coord goal, int[][] map) {
+    public DFS(Coord start, Coord goal, int[][] map) {
         this.start = start;
         this.goal = goal;
         this.map = map;
@@ -73,7 +72,7 @@ public class BFS{
     }
 
     private Node remove(){
-        Node node = frontier.poll();
+        Node node = frontier.pop();
 
         return node;
     }
@@ -110,10 +109,10 @@ public class BFS{
         if((state.getR() + state.getC()) % 2 == 0) pointsUp = true;
         else pointsUp = false;
 
-        if(validNeighbour(state, 0, 1)) validNeighbours.put("Right ", new Coord(state.getR(), state.getC() + 1));
-        if(pointsUp && validNeighbour(state, 1, 0)) validNeighbours.put("Down ", new Coord(state.getR() + 1, state.getC()));
-        if(validNeighbour(state, 0, -1)) validNeighbours.put("Left ", new Coord(state.getR(), state.getC() - 1));
         if(!(pointsUp) && validNeighbour(state, -1, 0)) validNeighbours.put("Up ", new Coord(state.getR() - 1, state.getC()));
+        if(validNeighbour(state, 0, -1)) validNeighbours.put("Left ", new Coord(state.getR(), state.getC() - 1));
+        if(pointsUp && validNeighbour(state, 1, 0)) validNeighbours.put("Down ", new Coord(state.getR() + 1, state.getC()));
+        if(validNeighbour(state, 0, 1)) validNeighbours.put("Right ", new Coord(state.getR(), state.getC() + 1));
 
         return validNeighbours;
     }
