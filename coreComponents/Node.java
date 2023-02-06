@@ -14,7 +14,7 @@ public class Node{
         if(parent != null){
             this.cost = parent.getCost() + 1;
             this.depth = parent.getDepth() + 1;
-            this.pathTo = parent.getPathTo() + " " + directionTo;
+            this.pathTo = parent.getPathTo() + directionTo;
         }else{
             this.cost = 0;
             this.depth = 0;
