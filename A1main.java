@@ -1,3 +1,6 @@
+import searchStrategies.*;
+import coreComponents.*;
+
 public class A1main {
 
 	public static void main(String[] args) {
@@ -9,34 +12,23 @@ public class A1main {
 		String searchChosen = args[0];// Search Algorithm is taken from command line
 		Conf conf = Conf.valueOf(args[1]);// Config is taken from command line
 
-		/*
-		System.out.println("Configuration:" + args[1]);
-		System.out.println("Map:");
-		printMap(conf.getMap(), conf.getS(), conf.getG());
-		System.out.println("Departure port: Start (r_s,c_s): " + conf.getS());
-		System.out.println("Destination port: Goal (r_g,c_g): " + conf.getG());
-		System.out.println("Search algorithm: " + args[0]);
-		System.out.println();
-		*/
-
 		runSearch(searchChosen, conf.getMap(), conf.getS(), conf.getG());
-
 	}
 
 	private static void runSearch(String algorithm, Map map, Coord start, Coord goal) {
 		switch(algorithm) {
-		case "BFS": //run BFS
-			break;
-		case "DFS": //run DFS
-			break;  
-		case "BestF": //run BestF
-			break;
-		case "AStar": //run AStar
-			break;
-		default:
-			System.out.println(algorithm + " is not a supported search strategy in this implementation. Please try one of <BFS/DFS/BestF/AStar>");
-			System.exit(0);
+			case "BFS":
+				BFS bfs = new BFS(start, goal, map.getMap());
+				bfs.search();
+			case "DFS":
+			case "BestF":
+			case "AStar":
+				break;
+			default:
+				System.out.println(algorithm + " is not a supported search strategy in this implementation. Please try one of <BFS/DFS/BestF/AStar>");
+				System.exit(0);
 		}
+
 
 	}
 
@@ -101,8 +93,6 @@ public class A1main {
 		}
 		return false;
 	}
-
-
 
 	public static String flip(boolean right) {
         //prints triangle edges
