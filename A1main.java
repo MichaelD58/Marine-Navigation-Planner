@@ -20,7 +20,11 @@ public class A1main {
 			case "BFS":
 				BFS bfs = new BFS(start, goal, map.getMap());
 				bfs.search();
+				break;
 			case "DFS":
+				DFS dfs = new DFS(start, goal, map.getMap());
+				dfs.search();
+				break;
 			case "BestF":
 			case "AStar":
 				break;
