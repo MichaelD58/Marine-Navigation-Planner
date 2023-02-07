@@ -6,7 +6,8 @@ public class Node{
     private double cost;
     private int depth;
     private String pathTo;
-
+    private double heuristic;
+    private int direction;
 
     public Node(Coord state, Node parent, String directionTo) {
         this.state = state;
@@ -20,7 +21,27 @@ public class Node{
             this.depth = 0;
             this.pathTo = "";
         }
-        
+    }
+
+    public Node(Coord state, Node parent, String directionTo, double heuristic) {
+        this.state = state;
+        this.parent = parent;
+        if(parent != null){
+            this.cost = parent.getCost() + 1;
+            this.depth = parent.getDepth() + 1;
+            this.pathTo = parent.getPathTo() + directionTo;
+        }else{
+            this.cost = 0;
+            this.depth = 0;
+            this.pathTo = "";
+        }
+        if(directionTo != null){
+            if(directionTo.equals("Right ")) this.direction = 0;
+            else if(directionTo.equals("Down ")) this.direction = 1;
+            else if(directionTo.equals("Left ")) this.direction = 2;
+            else this.direction = 3;
+        }
+        this.heuristic = heuristic;
     }
 
     public Coord getState() {
@@ -41,5 +62,13 @@ public class Node{
 
     public String getPathTo() {
 		return pathTo;
+	}
+
+    public double getHeuristic() {
+		return heuristic;
+	}
+
+    public int getDirection() {
+		return direction;
 	}
 }
