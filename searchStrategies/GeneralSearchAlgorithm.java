@@ -96,7 +96,20 @@ public abstract class GeneralSearchAlgorithm{
         System.exit(0);
     }
 
-    protected abstract LinkedHashMap<String, Coord>  successorFn(Coord state);
+    protected LinkedHashMap<String, Coord>  successorFn(Coord state){
+        LinkedHashMap<String, Coord> validNeighbours = new LinkedHashMap<String, Coord>();
+        Boolean pointsUp;
+
+        if((state.getR() + state.getC()) % 2 == 0) pointsUp = true;
+        else pointsUp = false;
+
+        if(validNeighbour(state, 0, 1)) validNeighbours.put("Right ", new Coord(state.getR(), state.getC() + 1));
+        if(pointsUp && validNeighbour(state, 1, 0)) validNeighbours.put("Down ", new Coord(state.getR() + 1, state.getC()));
+        if(validNeighbour(state, 0, -1)) validNeighbours.put("Left ", new Coord(state.getR(), state.getC() - 1));
+        if(!(pointsUp) && validNeighbour(state, -1, 0)) validNeighbours.put("Up ", new Coord(state.getR() - 1, state.getC()));
+
+        return validNeighbours;
+    }
 
     protected boolean validNeighbour(Coord state, int newY, int newX){
         int newR = state.getR() + newY;

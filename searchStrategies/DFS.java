@@ -10,7 +10,6 @@ public class DFS extends GeneralSearchAlgorithm{
         super(start, goal, map);
     }
  
-
     @Override
     protected Node remove(){
         Node newNode = frontier.get(frontier.size() - 1);
