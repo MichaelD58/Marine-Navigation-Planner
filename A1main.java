@@ -26,6 +26,9 @@ public class A1main {
 				dfs.search();
 				break;
 			case "BestF":
+				BestF bestf = new BestF(start, goal, map.getMap());
+				bestf.search();
+				break;
 			case "AStar":
 				break;
 			default:
