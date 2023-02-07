@@ -31,9 +31,8 @@ public abstract class GeneralSearchAlgorithm{
             nodesVisited++;
             explored.add(nextNode.getState().toString());
 
-            if(goalTest(nextNode.getState(), goal)){
-                printSuccessToOutput(nextNode);
-            }else{
+            if(goalTest(nextNode.getState(), goal)) printSuccessToOutput(nextNode);
+            else{
                 for (Map.Entry<String, Coord> entry : successorFn(nextNode.getState()).entrySet()) {
                     String direction = entry.getKey();
                     Coord state = entry.getValue();
@@ -111,7 +110,7 @@ public abstract class GeneralSearchAlgorithm{
     }
 
     protected boolean inFrontier(Coord state){
-        for (Node node: frontier) {
+        for (Node node : frontier) {
             if(node.getState().equals(state)) return true;
         }
 
@@ -119,7 +118,7 @@ public abstract class GeneralSearchAlgorithm{
     }
 
     protected void printFailureToOutput(){
-        System.out.println("fail");
+        System.out.println("\nfail");
         System.out.println(nodesVisited);
     }
 
