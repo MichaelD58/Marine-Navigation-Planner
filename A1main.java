@@ -30,6 +30,8 @@ public class A1main {
 				bestf.search();
 				break;
 			case "AStar":
+				AStar astar = new AStar(start, goal, map.getMap());
+				astar.search();
 				break;
 			default:
 				System.out.println(algorithm + " is not a supported search strategy in this implementation. Please try one of <BFS/DFS/BestF/AStar>");
