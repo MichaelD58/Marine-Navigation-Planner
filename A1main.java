@@ -33,6 +33,10 @@ public class A1main {
 				AStar astar = new AStar(start, goal, map.getMap());
 				astar.search();
 				break;
+			case "BiDirectional":
+				BiDirectional bidirectional = new BiDirectional(start, goal, map.getMap());
+				bidirectional.search();
+				break;
 			default:
 				System.out.println(algorithm + " is not a supported search strategy in this implementation. Please try one of <BFS/DFS/BestF/AStar>");
 				System.exit(0);
