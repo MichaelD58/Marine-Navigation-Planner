@@ -2,7 +2,6 @@ package searchStrategies;
 
 import coreComponents.*;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
 public class AStar extends IntermediateSearchAlgorithm{
@@ -12,7 +11,7 @@ public class AStar extends IntermediateSearchAlgorithm{
     }
 
     @Override
-    protected Node makeNode(Node parent, Coord state, String direction){
+    protected Node makeNode(Node parent, Coord state, String direction, Coord goal){
         double existingPathCost = 0;
         if(parent != null) existingPathCost = parent.getCost() + 1.0;
 
@@ -21,8 +20,8 @@ public class AStar extends IntermediateSearchAlgorithm{
     }
 
     @Override
-    protected void insert(Node node){
-        if(super.inFrontier(node.getState())){
+    protected void insert(LinkedList<Node> frontier, Node node){
+        if(super.inFrontier(frontier, node.getState())){
             for (Node currentNode : frontier) {
                 if (currentNode.getState().equals(node.getState())) {
                   if (currentNode.getHeuristic() > node.getHeuristic()) {
@@ -35,7 +34,7 @@ public class AStar extends IntermediateSearchAlgorithm{
     }
 
     @Override
-    protected boolean inFrontier(Coord state){
+    protected boolean inFrontier(LinkedList<Node> frontier, Coord state){
         return false;
     }
 

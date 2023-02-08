@@ -13,7 +13,7 @@ public class IntermediateSearchAlgorithm extends GeneralSearchAlgorithm{
 
     @Override
     protected void printFrontier(){
-        frontier = orderFrontier();
+        frontier = orderFrontier(frontier);
         System.out.print("[");
 
         for (int i = 0; i < frontier.size(); i++) {
@@ -24,7 +24,7 @@ public class IntermediateSearchAlgorithm extends GeneralSearchAlgorithm{
     }
 
     @Override
-    protected Node makeNode(Node parent, Coord state, String direction){
+    protected Node makeNode(Node parent, Coord state, String direction, Coord goal){
         Node newNode = new Node(state, parent, direction, getManhattanDistance(state, goal));
         return newNode;
     }
@@ -62,7 +62,7 @@ public class IntermediateSearchAlgorithm extends GeneralSearchAlgorithm{
         return triangleCoords;
     }
 
-    protected LinkedList<Node> orderFrontier(){
+    protected LinkedList<Node> orderFrontier(LinkedList<Node> frontier){
         LinkedList<Node> newFrontier = new LinkedList<Node>();
         
         while(!frontier.isEmpty()){

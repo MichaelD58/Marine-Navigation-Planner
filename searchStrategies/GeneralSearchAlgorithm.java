@@ -22,8 +22,8 @@ public abstract class GeneralSearchAlgorithm{
     }
 
     public void search(){
-        Node startingNode = makeNode(null, start, null);
-        insert(startingNode);
+        Node startingNode = makeNode(null, start, null, goal);
+        insert(frontier, startingNode);
 
         while(!(frontier.isEmpty())){
             printFrontier();
@@ -38,9 +38,9 @@ public abstract class GeneralSearchAlgorithm{
                     Coord state = entry.getValue();
                     
                     if(!(explored.contains(state.toString()))){
-                        if(!(inFrontier(state))){
-                            Node createdNode = makeNode(nextNode, state, direction);
-                            insert(createdNode);
+                        if(!(inFrontier(frontier, state))){
+                            Node createdNode = makeNode(nextNode, state, direction, goal);
+                            insert(frontier, createdNode);
                         } 
                     }
                 }      
@@ -60,12 +60,12 @@ public abstract class GeneralSearchAlgorithm{
         }
     }
 
-    protected Node makeNode(Node parent, Coord state, String direction){
+    protected Node makeNode(Node parent, Coord state, String direction, Coord goal){
         Node newNode = new Node(state, parent, direction);
         return newNode;
     }
 
-    protected void insert(Node node){
+    protected void insert(LinkedList<Node> frontier, Node node){
         frontier.add(node);
     }
 
@@ -122,7 +122,7 @@ public abstract class GeneralSearchAlgorithm{
         return true;
     }
 
-    protected boolean inFrontier(Coord state){
+    protected boolean inFrontier(LinkedList<Node> frontier, Coord state){
         for (Node node : frontier) {
             if(node.getState().equals(state)) return true;
         }

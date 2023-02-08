@@ -2,8 +2,6 @@ package searchStrategies;
 
 import coreComponents.*;
 
-import java.util.LinkedHashMap;
-
 public class BFS extends GeneralSearchAlgorithm{
 
     public BFS(Coord start, Coord goal, int[][] map) {
